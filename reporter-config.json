@@ -1,0 +1,5 @@
+{
+  "reporterEnabled": "spec, mochawesome, mocha-junit-reporter",
+  "mochawesomeReporterOptions": { "reportDir": "reports", "reportFilename": "report", "quiet": true },
+  "mochaJunitReporterReporterOptions": { "mochaFile": "reports/junit.xml" }
+}

@@ -1,0 +1,33 @@
+name: API tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:ci
+        env:
+          API_BASE: ${{ vars.API_BASE }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-reports
+          path: reports/
+      - name: Publish JUnit results
+        if: always()
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: reports/junit.xml
