@@ -1,12 +1,15 @@
 import { expect } from 'chai';
 import { employeesApi, bearer, payload } from '../src/client.js';
-import { getTokens, creds } from '../src/auth.js';
+import { getTokens, creds, login, unwrap, sendOtp, confirmOtp, setPassword } from '../src/auth.js';
 
 const { phone, password } = creds();
 const PATH = '/merchant-employees';
-// Adding an employee sends an SMS with a password to their phone — gate the lifecycle on a
-// number you control. The validation/access checks below never create anyone, so they always run.
-const TEST_PHONE = process.env.EMPLOYEE_TEST_PHONE;
+// Adding an employee lets them log in after activating a password via OTP. In the test env the
+// +99800XXXXXXX numbers take a hardcoded OTP — set it here to run the lifecycle, else it skips.
+const OTP = process.env.EMPLOYEE_TEST_OTP;
+// A fresh virtual number per run (any digits after +99800) so runs don't collide.
+const newEmployeePhone = () => `+99800${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
+const EMP_PASSWORD = 'Noor-Emp-Qa1!'; // password the new employee sets via OTP, then logs in with
 
 // Single employee from whichever shape the create/get responses use.
 const unwrapEmployee = (body) => body?.data?.employee ?? body?.data ?? body;
@@ -69,26 +72,41 @@ const unwrapEmployee = (body) => body?.data?.employee ?? body?.data ?? body;
     });
   });
 
-  // Creates a real employee (sends an SMS). Skipped unless EMPLOYEE_TEST_PHONE is set.
-  (TEST_PHONE ? describe : describe.skip)('add -> view -> edit -> remove (sends an SMS)', () => {
+  // Full lifecycle: the admin adds an employee, the employee activates a password via the
+  // hardcoded OTP and logs in, the admin edits and removes them. Creates a real (virtual)
+  // employee and cleans up. Skipped unless EMPLOYEE_TEST_OTP is set.
+  (OTP ? describe : describe.skip)('add -> activate (OTP) -> login -> edit -> remove', () => {
+    const empPhone = newEmployeePhone();
     let emp;
 
     after(async () => {
       if (emp?.employee_id) await employeesApi.delete(`${PATH}/${emp.employee_id}`).set(auth); // safety net
     });
 
-    it('adds a manager', async () => {
-      const res = await add({ phone: TEST_PHONE, role: 'manager', first_name: 'QA', last_name: 'Autotest' }).expect(200);
+    it('adds a manager @smoke', async () => {
+      const res = await add({ phone: empPhone, role: 'manager', first_name: 'QA', last_name: 'Autotest' }).expect(200);
       emp = unwrapEmployee(res.body);
       expect(emp.employee_id, 'employee_id').to.be.a('string').and.not.empty;
-      expect(emp).to.include({ phone: TEST_PHONE, role: 'manager' }); // TODO: confirm status/name fields in the create response
+      expect(emp).to.include({ phone: empPhone, role: 'manager', status: 'active', first_name: 'QA', last_name: 'Autotest' });
+      expect(emp.merchant_id, 'merchant_id').to.be.a('string').and.not.empty;
     });
 
     it('new employee appears in the list and by id', async () => {
       expect((await list()).find((e) => e.employee_id === emp.employee_id), 'in list')
-        .to.include({ phone: TEST_PHONE, role: 'manager' });
+        .to.include({ phone: empPhone, role: 'manager' });
       const res = await employeesApi.get(`${PATH}/${emp.employee_id}`).set(auth).expect(200);
-      expect(unwrapEmployee(res.body)).to.include({ employee_id: emp.employee_id, phone: TEST_PHONE, role: 'manager' });
+      expect(unwrapEmployee(res.body)).to.include({ employee_id: emp.employee_id, phone: empPhone, role: 'manager' });
+    });
+
+    it('the employee sets a password via OTP and logs in', async () => {
+      await sendOtp(empPhone).expect(200);
+      const confirmed = await confirmOtp(empPhone, OTP).expect(200);
+      const { confirmation_id } = unwrap(confirmed.body);
+      expect(confirmation_id, 'confirmation_id').to.be.a('string').and.not.empty;
+      await setPassword(confirmation_id, EMP_PASSWORD).expect(200);
+
+      const res = await login(empPhone, EMP_PASSWORD).expect(200);
+      expect(unwrap(res.body).access_token, 'employee access_token').to.be.a('string').and.not.empty;
     });
 
     it('edits first and last name', async () => {
@@ -98,10 +116,12 @@ const unwrapEmployee = (body) => body?.data?.employee ?? body?.data ?? body;
       expect(unwrapEmployee(res.body)).to.include({ employee_id: emp.employee_id, first_name: 'QA-upd', last_name: 'Autotest-upd' });
     });
 
-    it('removes the employee', async () => {
+    it('removes the employee; they can no longer log in', async () => {
       const res = await employeesApi.delete(`${PATH}/${emp.employee_id}`).set(auth);
       expect(res.status, res.text).to.be.below(300);
       expect((await list()).map((e) => e.employee_id)).to.not.include(emp.employee_id);
+      const relogin = await login(empPhone, EMP_PASSWORD);
+      expect(relogin.status, 'login after removal is refused').to.be.at.least(400);
       emp = null;
     });
   });

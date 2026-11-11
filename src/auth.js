@@ -39,3 +39,10 @@ export const logout = (access_token, refresh_token) => {
 /** A protected Delivery endpoint, used to check that a token is accepted/revoked. */
 export const VENDOR_ME = '/api/v1/vendors/me';
 export const getMe = (access_token) => api.get(VENDOR_ME).set('Authorization', bearer(access_token));
+
+// OTP + set-password: how a new employee (or a reset) activates a password.
+export const sendOtp = (phone) => api.post('/api/v1/otp/send').send({ phone, app: 'merchant', language: 'uz' });
+export const confirmOtp = (phone, otp, purpose = 'OTP_PURPOSE_SET_PASSWORD') =>
+  api.post('/api/v1/otp/confirm').send({ phone, otp, purpose });
+export const setPassword = (confirmation_id, new_password) =>
+  api.post('/api/v1/auth/merchants/set-password').send({ confirmation_id, new_password });
