@@ -25,3 +25,14 @@ export const api = make(CORE_URL, { platform: true });
 api.anon = make(CORE_URL, { platform: false });
 
 export const bearer = (token) => `Bearer ${token}`;
+
+// Some gateway/middleware errors (missing X-Platform, auth failures) return JSON with a
+// `text/plain` content-type, so Supertest leaves res.body empty. Read the body either way.
+export function payload(res) {
+  if (res.body && Object.keys(res.body).length) return res.body;
+  try {
+    return JSON.parse(res.text);
+  } catch {
+    return {};
+  }
+}

@@ -35,3 +35,7 @@ export const logout = (access_token, refresh_token) => {
   if (access_token) req.set('Authorization', bearer(access_token));
   return req.send(refresh_token ? { refresh_token } : {});
 };
+
+/** A protected Delivery endpoint, used to check that a token is accepted/revoked. */
+export const VENDOR_ME = '/api/v1/vendors/me';
+export const getMe = (access_token) => api.get(VENDOR_ME).set('Authorization', bearer(access_token));
