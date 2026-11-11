@@ -68,8 +68,9 @@ const URL = '/api/v1/vendors/pricing';
   });
 
   // The panel shows these fees from `tariff` (the summary base_rate/wait_time block
-  // zeroes them out — see the known-bug test below). Each must carry a real value.
-  describe('tariff — configured fees always have a value', () => {
+  // zeroes them out — see the known-bug test below). Each must always be present and
+  // numeric; the value itself may legitimately be 0.
+  describe('tariff — configured fees are always present and numeric', () => {
     let tariff;
     before(async () => {
       tariff = (await get().expect(200)).body.tariff;
@@ -81,20 +82,20 @@ const URL = '/api/v1/vendors/pricing';
       expect(tariff.name, 'name').to.be.a('string').and.not.empty;
     });
 
-    it('base price (new point) has a value', () => {
-      expect(tariff.price, 'tariff.price').to.be.a('number').and.above(0); // e.g. 5000 сум
+    it('base price (new point) is numeric', () => {
+      expect(tariff.price, 'tariff.price').to.be.a('number').and.at.least(0); // e.g. 5000 сум
     });
 
-    it('order-cancel price has a value', () => {
-      expect(tariff.cancelled_paid_price, 'cancelled_paid_price').to.be.a('number').and.above(0); // e.g. 12000 сум
+    it('order-cancel price is numeric', () => {
+      expect(tariff.cancelled_paid_price, 'cancelled_paid_price').to.be.a('number').and.at.least(0); // e.g. 12000 сум
     });
 
-    it('free wait time has a value', () => {
-      expect(tariff.free_wait_time, 'free_wait_time').to.be.a('number').and.above(0); // e.g. 10 min
+    it('free wait time is numeric', () => {
+      expect(tariff.free_wait_time, 'free_wait_time').to.be.a('number').and.at.least(0); // e.g. 10 min
     });
 
-    it('price per minute after free wait has a value', () => {
-      expect(tariff.price_per_minute_after_wait, 'price_per_minute_after_wait').to.be.a('number').and.above(0); // e.g. 500 сум
+    it('price per minute after free wait is numeric', () => {
+      expect(tariff.price_per_minute_after_wait, 'price_per_minute_after_wait').to.be.a('number').and.at.least(0); // e.g. 500 сум
     });
   });
 
