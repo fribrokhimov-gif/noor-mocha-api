@@ -2,12 +2,14 @@ import request from 'supertest';
 
 // Core API: auth + delivery. Override with API_BASE only to point at another env.
 export const CORE_URL = process.env.API_BASE || 'https://core.test.api.noor.uz';
+// Merchant-employees live on the eats host.
+export const EMPLOYEES_URL = process.env.EMPLOYEES_API_URL || 'https://eats.test.api.noor.uz/api/v1';
 // Authenticated endpoints require X-Platform: web | ios | android.
 export const X_PLATFORM = process.env.X_PLATFORM || 'web';
 
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
 
-function make(base, { platform }) {
+function build(base, platform) {
   return Object.fromEntries(
     METHODS.map((m) => [
       m,
@@ -19,10 +21,16 @@ function make(base, { platform }) {
   );
 }
 
-// `api` sets X-Platform. For protected calls add .set('Authorization', bearer(token)).
-export const api = make(CORE_URL, { platform: true });
-// Same base, WITHOUT X-Platform — for the "missing X-Platform" guard checks.
-api.anon = make(CORE_URL, { platform: false });
+// A client for a host: methods send X-Platform; `.anon` omits it (for the guard checks).
+// For protected calls add .set('Authorization', bearer(token)).
+export function clientFor(base) {
+  const c = build(base, true);
+  c.anon = build(base, false);
+  return c;
+}
+
+export const api = clientFor(CORE_URL); // core: auth + delivery
+export const employeesApi = clientFor(EMPLOYEES_URL); // eats: merchant-employees
 
 export const bearer = (token) => `Bearer ${token}`;
 
