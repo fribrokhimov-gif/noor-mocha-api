@@ -66,4 +66,44 @@ const URL = '/api/v1/vendors/pricing';
   it('is rejected with an invalid token', async () => {
     await api.get(URL).set('Authorization', bearer('abc.def.ghi')).expect(401);
   });
+
+  // The panel shows these fees from `tariff` (the summary base_rate/wait_time block
+  // zeroes them out — see the known-bug test below). Each must carry a real value.
+  describe('tariff — configured fees always have a value', () => {
+    let tariff;
+    before(async () => {
+      tariff = (await get().expect(200)).body.tariff;
+    });
+
+    it('identifies the tariff', () => {
+      expect(tariff).to.include.keys(['id', 'vendor_id', 'name']);
+      expect(tariff.id, 'id').to.be.a('number');
+      expect(tariff.name, 'name').to.be.a('string').and.not.empty;
+    });
+
+    it('base price (new point) has a value', () => {
+      expect(tariff.price, 'tariff.price').to.be.a('number').and.above(0); // e.g. 5000 сум
+    });
+
+    it('order-cancel price has a value', () => {
+      expect(tariff.cancelled_paid_price, 'cancelled_paid_price').to.be.a('number').and.above(0); // e.g. 12000 сум
+    });
+
+    it('free wait time has a value', () => {
+      expect(tariff.free_wait_time, 'free_wait_time').to.be.a('number').and.above(0); // e.g. 10 min
+    });
+
+    it('price per minute after free wait has a value', () => {
+      expect(tariff.price_per_minute_after_wait, 'price_per_minute_after_wait').to.be.a('number').and.above(0); // e.g. 500 сум
+    });
+  });
+
+  // KNOWN BUG: the base_rate / wait_time summary returns 0 for fees the tariff defines,
+  // so the panel reads them from `tariff`. Un-skip once the summary carries the real values.
+  it.skip('summary block mirrors the tariff fees (known mismatch: summary returns 0)', async () => {
+    const p = (await get().expect(200)).body;
+    expect(p.wait_time.free_wait_time, 'free_wait_time').to.equal(p.tariff.free_wait_time);
+    expect(p.wait_time.price_per_minute_after, 'price_per_minute_after').to.equal(p.tariff.price_per_minute_after_wait);
+    expect(p.base_rate.cancelled_paid_price, 'cancelled_paid_price').to.equal(p.tariff.cancelled_paid_price);
+  });
 });
