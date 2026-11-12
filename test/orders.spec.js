@@ -31,6 +31,44 @@ const day = (offset) => new Date(Date.now() + offset * 864e5).toISOString().slic
     });
   });
 
+  // Coordinate validation on eval — the origin lat/long is mandatory and validated.
+  describe('eval — coordinates (lat/long)', () => {
+    const INVALID_LOCATION = 8002;
+    const expectInvalidLocation = async (mutate) => {
+      const body = orderBody();
+      mutate(body);
+      const res = await evalOrder(token, body).expect(400);
+      expect(res.body).to.have.nested.property('error.code', INVALID_LOCATION);
+    };
+
+    it('requires origin coordinates @smoke', () => expectInvalidLocation((b) => delete b.origin[0].location));
+    it('requires origin latitude', () => expectInvalidLocation((b) => delete b.origin[0].location.lat));
+    it('requires origin longitude', () => expectInvalidLocation((b) => delete b.origin[0].location.long));
+    it('rejects empty origin coordinates', () => expectInvalidLocation((b) => { b.origin[0].location = {}; }));
+    it('rejects zero origin coordinates (0,0)', () => expectInvalidLocation((b) => { b.origin[0].location = { lat: 0, long: 0 }; }));
+
+    it('rejects non-numeric coordinates', async () => {
+      const body = orderBody();
+      body.origin[0].location.lat = '41.311';
+      await evalOrder(token, body).expect(400);
+    });
+
+    // FINDING: only the origin is validated. A missing destination location returns a degenerate
+    // quote (200) instead of 400. Un-skip once the destination is validated like the origin.
+    it.skip('should require destination coordinates (currently returns a degenerate quote)', async () => {
+      const body = orderBody();
+      delete body.destination[0].location;
+      await evalOrder(token, body).expect(400);
+    });
+
+    // FINDING: out-of-range coordinates are accepted. lat=999 returns a degenerate quote (200).
+    it.skip('should reject an out-of-range latitude (currently accepted)', async () => {
+      const body = orderBody();
+      body.origin[0].location.lat = 999;
+      await evalOrder(token, body).expect(400);
+    });
+  });
+
   // Required-field validation at create. These are rejected (400) so no order is created.
   describe('create — required fields', () => {
     it('rejects an order with no receiver phone', async () => {
