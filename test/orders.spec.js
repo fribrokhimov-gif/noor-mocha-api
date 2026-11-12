@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { payload } from '../src/client.js';
 import { getTokens, creds } from '../src/auth.js';
 import { orderBody, evalOrder, createOrder, getOrder, cancelOrder, myOrders } from '../src/orders.js';
 
@@ -27,6 +28,37 @@ const day = (offset) => new Date(Date.now() + offset * 864e5).toISOString().slic
       const res = await evalOrder(token, {}).expect(400);
       expect(res.body).to.have.nested.property('error.code', 8003);
       expect(res.body.error.details[0]).to.include({ issue: 'origin' });
+    });
+  });
+
+  // Required-field validation at create. These are rejected (400) so no order is created.
+  describe('create — required fields', () => {
+    it('rejects an order with no receiver phone', async () => {
+      const body = orderBody();
+      delete body.destination[0].client.phone;
+      const res = await createOrder(token, body).expect(400);
+      expect(Object.keys(payload(res)), 'names the missing phone field').to.include('destination[0].client.phone');
+    });
+
+    it('rejects an order with no sender phone', async () => {
+      const body = orderBody();
+      delete body.origin[0].client.phone;
+      const res = await createOrder(token, body).expect(400);
+      expect(Object.keys(payload(res))).to.include('origin[0].client.phone');
+    });
+
+    it('rejects an order with no client block', async () => {
+      const body = orderBody();
+      delete body.destination[0].client;
+      await createOrder(token, body).expect(400);
+    });
+
+    // FINDING: address is not enforced — an order with no address is accepted and created
+    // (should be 400). Skipped so the suite doesn't create orders; un-skip once enforced.
+    it.skip('should reject an order with no address (currently accepted and created)', async () => {
+      const body = orderBody();
+      delete body.destination[0].address;
+      await createOrder(token, body).expect(400);
     });
   });
 

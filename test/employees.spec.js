@@ -72,6 +72,36 @@ const unwrapEmployee = (body) => body?.data?.employee ?? body?.data ?? body;
     });
   });
 
+  // Adding the same phone twice. Creates a (virtual) employee and cleans up.
+  describe('duplicate phone', () => {
+    const empPhone = newEmployeePhone();
+    let id;
+
+    after(async () => {
+      if (id) await employeesApi.delete(`${PATH}/${id}`).set(auth);
+    });
+
+    it('adding the same phone again returns the existing employee (no duplicate)', async () => {
+      const first = await add({ phone: empPhone, role: 'manager', first_name: 'QA', last_name: 'Dup' }).expect(200);
+      id = unwrapEmployee(first.body).employee_id;
+
+      // add again with the same phone and a different role
+      const again = await add({ phone: empPhone, role: 'cashier', first_name: 'QA', last_name: 'Dup2' }).expect(200);
+      expect(unwrapEmployee(again.body).employee_id, 'same employee returned').to.equal(id);
+
+      const same = (await list()).filter((e) => e.phone === empPhone);
+      expect(same, 'no duplicate created').to.have.length(1);
+      expect(same[0].role, 'original role preserved').to.equal('manager');
+    });
+
+    // FINDING: re-adding an existing phone silently returns 200 with the existing employee.
+    // Ideally it should be a conflict (4xx). Un-skip once the backend rejects duplicates.
+    it.skip('re-adding an existing phone should be a conflict, not 200', async () => {
+      const res = await add({ phone: empPhone, role: 'manager', first_name: 'QA', last_name: 'Dup' });
+      expect(res.status).to.be.within(400, 409);
+    });
+  });
+
   // Full lifecycle: the admin adds an employee, the employee activates a password via the
   // hardcoded OTP and logs in, the admin edits and removes them. Creates a real (virtual)
   // employee and cleans up. Skipped unless EMPLOYEE_TEST_OTP is set.
