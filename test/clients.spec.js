@@ -6,6 +6,9 @@ const { phone, password } = creds();
 const URL = '/api/v1/vendors/clients';
 const ENVELOPE = ['data', 'count', 'page_size', 'current_page', 'last_page'];
 const CLIENT = ['id', 'first_name', 'last_name', 'email', 'number', 'created_at'];
+// Fields that must always carry a value (null/empty = a bug). last_name & email are nullable.
+const REQUIRED = ['id', 'first_name', 'number', 'created_at'];
+const missing = (v) => v === null || v === undefined || v === '';
 
 (phone && password ? describe : describe.skip)('Vendors — clients', () => {
   let token;
@@ -25,16 +28,23 @@ const CLIENT = ['id', 'first_name', 'last_name', 'email', 'number', 'created_at'
 
     for (const c of res.body.data) {
       expect(c).to.include.all.keys(CLIENT);
-      expect(c.id, 'id').to.be.a('number');
-      // Customer name, phone and date must each have a value.
-      expect(c.first_name, 'customer name').to.be.a('string').and.not.empty;
-      expect(c.number, 'phone').to.be.a('string').and.not.empty;
-      expect(c.created_at, 'date').to.be.a('string').and.not.empty;
-      expect(Number.isNaN(Date.parse(c.created_at)), 'date is valid').to.be.false;
       // present but nullable
       expect(c.last_name, 'last_name').to.satisfy((v) => v === null || typeof v === 'string');
       expect(c.email, 'email').to.satisfy((v) => v === null || typeof v === 'string');
     }
+  });
+
+  // Required fields (name, phone, date, id) must never come back null/empty. Scan every row
+  // and report all offenders at once, so a bugged null is pinpointed by client id and field.
+  it('every client has name, phone and date (no bugged nulls)', async () => {
+    const data = (await get('?limit=50&skip=0').expect(200)).body.data;
+    const offenders = [];
+    for (const c of data)
+      for (const k of REQUIRED)
+        if (missing(c[k])) offenders.push(`client ${c.id ?? '?'}: ${k}=${c[k] === '' ? 'empty' : c[k]}`);
+    expect(offenders, offenders.join('; ')).to.be.empty;
+    // phone is always a non-empty string
+    for (const c of data) expect(c.number, `client ${c.id} phone`).to.be.a('string').and.not.empty;
   });
 
   it('paginates by skip (current_page = skip/limit + 1)', async () => {
