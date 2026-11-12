@@ -34,6 +34,19 @@ export const employeesApi = clientFor(EMPLOYEES_URL); // eats: merchant-employee
 
 export const bearer = (token) => `Bearer ${token}`;
 
+// Generated files (reports) are served from the file host.
+export const FILES_URL = process.env.FILES_URL || 'https://tback.noor.uz';
+const binaryParser = (res, cb) => {
+  const chunks = [];
+  res.on('data', (c) => chunks.push(Buffer.from(c)));
+  res.on('end', () => cb(null, Buffer.concat(chunks)));
+};
+/** Download a generated file (e.g. a report's `path` like "reports/….xlsx") as a Buffer. */
+export async function downloadFile(path) {
+  const res = await request(FILES_URL).get(`/files/${path}`).buffer(true).parse(binaryParser);
+  return res.body;
+}
+
 // Some gateway/middleware errors (missing X-Platform, auth failures) return JSON with a
 // `text/plain` content-type, so Supertest leaves res.body empty. Read the body either way.
 export function payload(res) {

@@ -1,10 +1,12 @@
 import { expect } from 'chai';
-import { api, bearer, payload } from '../src/client.js';
+import ExcelJS from 'exceljs';
+import { api, bearer, payload, downloadFile } from '../src/client.js';
 import { getTokens, creds } from '../src/auth.js';
 
 const { phone, password } = creds();
 const REPORTS = '/api/v1/orders/reports';
 const EXPORT = '/api/v1/orders/export';
+const STATS = '/api/v1/vendors/stats';
 
 (phone && password ? describe : describe.skip)('Orders — reports & export', () => {
   let token;
@@ -52,6 +54,46 @@ const EXPORT = '/api/v1/orders/export';
 
     it('is rejected without a token', async () => {
       await api.get(`${EXPORT}?from_date=${from}&till_date=${till}`).expect(401);
+    });
+  });
+
+  // Download the generated .xlsx and verify its contents. Uses settled past dates so the
+  // numbers are stable; asserts relationships (not hardcoded counts) that hold for any data.
+  describe('report contents (.xlsx)', function () {
+    this.timeout(60000);
+    const D0 = '2026-11-10', D1 = '2026-11-11', D2 = '2026-11-12';
+
+    const exportRange = (from, till) =>
+      api.get(`${EXPORT}?from_date=${from}&till_date=${till}`).set(auth());
+
+    // Download the report's xlsx and return { header, dataRows }.
+    async function report(from, till) {
+      const res = await exportRange(from, till).expect(200);
+      const buf = await downloadFile(res.body.path);
+      const wb = new ExcelJS.Workbook();
+      await wb.xlsx.load(buf);
+      const ws = wb.worksheets[0];
+      return { header: ws.getRow(1).values.slice(1).map(String), dataRows: ws.rowCount - 1 };
+    }
+
+    async function orderCount(from, till) {
+      const res = await api.get(`${STATS}?from_date=${from}&till_date=${till}&type=daily`).set(auth()).expect(200);
+      const buckets = Array.isArray(res.body) ? res.body : [];
+      return buckets.reduce((sum, b) => sum + b.count, 0);
+    }
+
+    it('a one-day report is an xlsx with one row per order @smoke', async () => {
+      const r = await report(D1, D2);
+      expect(r.header[0], 'first column').to.equal('Sotuvchi ID');
+      expect(r.header, 'column count').to.have.length(34);
+      expect(r.dataRows, 'row count = orders in range').to.equal(await orderCount(D1, D2));
+    });
+
+    it('a two-day report equals the sum of its two one-day reports', async () => {
+      const [a, b, ab] = [await report(D0, D1), await report(D1, D2), await report(D0, D2)];
+      expect(ab.dataRows, 'two-day = dayA + dayB').to.equal(a.dataRows + b.dataRows);
+      expect(ab.dataRows, 'two-day >= each one-day').to.be.at.least(Math.max(a.dataRows, b.dataRows));
+      expect(ab.dataRows, 'two-day row count = orders in range').to.equal(await orderCount(D0, D2));
     });
   });
 });
