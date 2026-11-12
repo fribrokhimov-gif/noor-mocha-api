@@ -22,10 +22,9 @@ jobs:
           X_PLATFORM: ${{ vars.X_PLATFORM }}
           MERCHANT_PHONE: ${{ secrets.MERCHANT_PHONE }}
           MERCHANT_PASSWORD: ${{ secrets.MERCHANT_PASSWORD }}
-          # Forgot-password flow — set these once the backend provides a fixed-OTP test number
-          # (the spec skips itself until both are present).
-          RESET_PHONE: ${{ secrets.RESET_PHONE }}
-          RESET_OTP: ${{ secrets.RESET_OTP }}
+          # Hardcoded test-env OTP for the +99800XXXXXXX virtual numbers. Enables the employee
+          # lifecycle and the forgot-password reset flow (both self-provision + clean up).
+          EMPLOYEE_TEST_OTP: ${{ secrets.EMPLOYEE_TEST_OTP }}
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v4

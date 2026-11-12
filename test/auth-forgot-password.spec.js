@@ -1,43 +1,50 @@
 import { expect } from 'chai';
-import { api } from '../src/client.js';
-import { login, unwrap } from '../src/auth.js';
+import { employeesApi, bearer } from '../src/client.js';
+import { getTokens, creds, login, unwrap, sendOtp, confirmOtp, setPassword } from '../src/auth.js';
 
-// Forgot-password flow: OTP send -> confirm -> set new password -> log in with it.
-//
-// The OTP is only delivered by SMS and is NOT returned by the API, so this flow
-// cannot run with an ordinary account. It is gated on a DEDICATED test number whose
-// OTP the backend fixes in the test env. Set these once the backend provides them
-// (.env locally, or CI secrets) — the test skips itself until both are present:
-//   RESET_PHONE=+998........      the test number
-//   RESET_OTP=000000             its fixed OTP in the test env
-//   RESET_NEW_PASSWORD=...       password the flow will set (optional; default below)
-const phone = process.env.RESET_PHONE;
-const otp = process.env.RESET_OTP;
-const newPassword = process.env.RESET_NEW_PASSWORD || 'Noor-Reset-1!';
-const PURPOSE = 'OTP_PURPOSE_SET_PASSWORD';
+const { phone, password } = creds();
+// forgot-password only works for a registered user (otp/send on an unknown number -> 404), so the
+// test provisions a throwaway employee first. The test env fixes the OTP for +99800 numbers.
+const OTP = process.env.EMPLOYEE_TEST_OTP;
+const EPATH = '/merchant-employees';
+const newPhone = () => `+99800${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
+const OLD_PASSWORD = 'Noor-Old-Qa1!';
+const NEW_PASSWORD = '4!2Xs>qd*[6)';
+const unwrapEmployee = (body) => body?.data?.employee ?? body?.data ?? body;
 
-(phone && otp ? describe : describe.skip)('Auth — forgot password @smoke', () => {
-  it('sends an OTP, confirms it, sets a new password, and logs in with it', async () => {
-    // 1. request an OTP SMS. 200 normally; inside the ~5-min resend window the backend
-    //    may reject a repeat send — the fixed OTP still confirms, so don't hard-fail here.
-    const sent = await api.post('/api/v1/otp/send').send({ phone, app: 'merchant', language: 'uz' });
-    expect([200, 400, 429], `otp/send: ${sent.text}`).to.include(sent.status);
+(phone && password && OTP ? describe : describe.skip)('Auth — forgot password (OTP reset)', () => {
+  let auth, emp;
+  const empPhone = newPhone();
 
-    // 2. confirm the (fixed) OTP -> confirmation_id
-    const confirmed = await api.post('/api/v1/otp/confirm').send({ phone, otp, purpose: PURPOSE });
-    expect(confirmed.status, `otp/confirm: ${confirmed.text}`).to.equal(200);
+  // Reset the employee's password via the OTP flow: otp/send -> otp/confirm -> set-password.
+  async function resetPassword(newPassword) {
+    await sendOtp(empPhone).expect(200);
+    const confirmed = await confirmOtp(empPhone, OTP).expect(200);
     const { confirmation_id } = unwrap(confirmed.body);
     expect(confirmation_id, 'confirmation_id').to.be.a('string').and.not.empty;
+    await setPassword(confirmation_id, newPassword).expect(200);
+  }
 
-    // 3. set the new password with that confirmation
-    const set = await api
-      .post('/api/v1/auth/merchants/set-password')
-      .send({ confirmation_id, new_password: newPassword });
-    expect(set.status, `set-password: ${set.text}`).to.equal(200);
+  before(async () => {
+    auth = { Authorization: bearer((await getTokens()).access_token) };
+    // provision a registered user and give them an initial password
+    const res = await employeesApi
+      .post(EPATH).set(auth)
+      .send({ new_identity: { phone: empPhone, role: 'manager', first_name: 'QA', last_name: 'Forgot' } })
+      .expect(200);
+    emp = unwrapEmployee(res.body);
+    await resetPassword(OLD_PASSWORD);
+    expect((await login(empPhone, OLD_PASSWORD)).status, 'initial login works').to.equal(200);
+  });
 
-    // 4. the new password now logs in
-    const relogin = await login(phone, newPassword);
-    expect(relogin.status, `re-login: ${relogin.text}`).to.equal(200);
-    expect(unwrap(relogin.body).access_token, 'access_token after reset').to.be.a('string').and.not.empty;
+  after(async () => {
+    if (emp?.employee_id) await employeesApi.delete(`${EPATH}/${emp.employee_id}`).set(auth);
+  });
+
+  it('resets a forgotten password via OTP: the new password works, the old one stops @smoke', async () => {
+    await resetPassword(NEW_PASSWORD);
+    const res = await login(empPhone, NEW_PASSWORD).expect(200);
+    expect(unwrap(res.body).access_token, 'access_token with the new password').to.be.a('string').and.not.empty;
+    expect((await login(empPhone, OLD_PASSWORD)).status, 'old password no longer works').to.equal(401);
   });
 });
