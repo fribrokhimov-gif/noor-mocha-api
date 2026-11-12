@@ -1,0 +1,2650 @@
+{
+	"info": {
+		"_postman_id": "4b3053f9-40de-4453-8be7-9b93820eae68",
+		"name": "Export Public",
+		"description": "### Api documentation for **Vendors**. By **Noor**.\n\n**Authentication**:\n\nFor integration with servers of Vendors, **Noor** will provide static token which is expected to be sent in **X-Auth** header in each request. Examples of this can be found in any request.\n\n### **Timezone**:\n\nNoor works in standard UTC timezone, meaning all date and time values returned by Noor is returned in UTC.\n\n### **Language**:\n\nValidation messages and certain names will be provided in **Uzbek** language by default. If you wish to receive them in different languages please provide language in **Accept-Language** header. Possible values: **en, ru, uz**. If incorrect value is passed to that header, Noor will take **uz** as default value.\n\n### **Webhook:**\n\nIf Noor is provided wiith webhook url. Vendors' servers will receive updates on orders programmatically. Server will send updates to vendors URL through POST request with the same body as the response of create order endpoint. It triggers every time stage/status of any order changes.\n\n### **Notes**:\n\nFor documentation on specific groups, please open corresponding request or folder documentation.\n\nIf you receive 400 Bad request error and not validation, there is a good chance types of certain values are incorrect. If Noor is expecting integer and receives string for example, it will throw 400 error.\n\nValidation of all inputs can be obtained by making a request to set endpoint.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34691167",
+		"_collection_link": "https://crimson-sunset-148359.postman.co/workspace/Export~480578e4-cee7-4707-813d-1a135c34abd5/collection/34691167-4b3053f9-40de-4453-8be7-9b93820eae68?action=share&source=collection_link&creator=34691167"
+	},
+	"item": [
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get By Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders/:order_id",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "604"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "10054"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2024 14:50:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1716"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 10054,\n    \"vendor_order_id\": \"2\",\n    \"reason\": null,\n    \"display_id\": 19761654,\n    \"stage\": 15,\n    \"payment_type\": \"BALANCE\",\n    \"origin\": [\n        {\n            \"id\": \"4E84mu\",\n            \"location\": {\n                \"long\": 69.2378267,\n                \"lat\": 41.2876424\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент, Яккасарайский район, махаллинский сход граждан Беларык, улица Беларик, 64А\",\n            \"arrived_at\": \"2025-01-21T12:08:56.440228Z\",\n            \"handed_over_at\": \"2025-01-21T12:08:57.929376Z\",\n            \"closed_point_at_distance\": 727,\n            \"eta\": \"2025-01-21T12:11:17.736754Z\",\n            \"skipped_at\": null,\n            \"products\": {\n                \"type_id\": 0,\n                \"description\": \"\",\n                \"items\": null\n            },\n            \"client\": {\n                \"phone\": \"+998977304681\",\n                \"name\": \"Buchet\",\n                \"email\": \"\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"id\": \"GAB907\",\n            \"location\": {\n                \"long\": 69.24108290174406,\n                \"lat\": 41.288166380368736\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент, Яккасарайский район, махаллинский сход граждан Беларык, улица Беларик\",\n            \"arrived_at\": \"2025-01-21T12:09:00.459641Z\",\n            \"handed_over_at\": \"2025-01-21T12:09:02.254407Z\",\n            \"closed_point_at_distance\": 749,\n            \"eta\": \"2025-01-21T12:12:21.736758Z\",\n            \"skipped_at\": null,\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Documents\",\n                \"items\": []\n            },\n            \"client\": {\n                \"phone\": \"+998675690890\",\n                \"name\": \"Recipient\",\n                \"email\": \"\"\n            }\n        }\n    ],\n    \"return_address\": {\n        \"id\": \"4E84mu\",\n        \"location\": {\n            \"long\": 69.2378267,\n            \"lat\": 41.2876424\n        },\n        \"order\": 1,\n        \"address\": \"Ташкент, Яккасарайский район, махаллинский сход граждан Беларык, улица Беларик, 64А\",\n        \"arrived_at\": null,\n        \"handed_over_at\": null,\n        \"closed_point_at_distance\": 0,\n        \"eta\": null,\n        \"skipped_at\": null,\n        \"client\": {\n            \"phone\": \"+998977304681\",\n            \"name\": \"Buchet\",\n            \"email\": \"\"\n        }\n    },\n    \"pricing\": {\n        \"total\": 5000,\n        \"products\": 0,\n        \"discount\": null\n    },\n    \"distances\": {\n        \"order\": 276,\n        \"dead_head\": 722\n    },\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": \"2025-01-21T12:09:02.370806Z\",\n        \"door_to_door\": false,\n        \"product_paid\": false,\n        \"equipment_id\": 12,\n        \"send_link\": true\n    },\n    \"vendor\": {\n        \"phone\": \"+998977304681\",\n        \"name\": \"Buchet\",\n        \"logo\": \"client/6c5711c86896b13a7d2d37eb81abbfa9.webp\"\n    },\n    \"courier\": {\n        \"id\": 344,\n        \"first_name\": \"ELBEK\",\n        \"last_name\": \"MIRZAMAXMUDOV\",\n        \"middle_name\": \"ERKIN O‘G‘LI\",\n        \"phone\": \"+998936669953\",\n        \"profile_photo\": \"profile_photos/mbCanXlPdt8NoTyYe7otpNOtase3LDpLANCFHggYljjCJiu5AiecxkEgGUfuL8oQ.jpg\",\n        \"average_rating\": 4.701754385964913,\n        \"location\": null,\n        \"created_at\": null\n    },\n    \"trace\": null,\n    \"rating\": {\n        \"custom_comment\": null,\n        \"order_id\": null,\n        \"client_id\": null,\n        \"vendor_id\": null,\n        \"comments\": [\n            {\n                \"id\": 24,\n                \"comment\": \"Kuryer manzilni darrow topolmadi\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 25,\n                \"comment\": \"Buyurtmaga zarar yetgan\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 26,\n                \"comment\": \"Qaytim bo'lmadi\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 27,\n                \"comment\": \"Uzoq vaqtda yetkazishdi\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 28,\n                \"comment\": \"Qisman yetkazishdi\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 29,\n                \"comment\": \"Taom sovuq holatda\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 30,\n                \"comment\": \"Taom mazali emas\",\n                \"is_positive\": false,\n                \"rated\": false\n            },\n            {\n                \"id\": 31,\n                \"comment\": \"Tez yetkazib berishdi\",\n                \"is_positive\": true,\n                \"rated\": false\n            },\n            {\n                \"id\": 32,\n                \"comment\": \"Kuryerning ishi\",\n                \"is_positive\": true,\n                \"rated\": false\n            },\n            {\n                \"id\": 33,\n                \"comment\": \"Mazali taom\",\n                \"is_positive\": true,\n                \"rated\": false\n            }\n        ],\n        \"created_at\": \"0001-01-01T00:00:00Z\"\n    },\n    \"link\": \"https://t.noor.uz/n/Xiky2\",\n    \"accepted_at\": \"2025-01-21T12:08:52.737547Z\",\n    \"created_at\": \"2025-01-21T12:08:24.889755Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "My Orders",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders?skip=0&limit=3&is_active=false",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								},
+								{
+									"key": "display_id",
+									"value": "1111",
+									"disabled": true
+								},
+								{
+									"key": "is_active",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders?skip=0&limit=3&is_active=true",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "skip",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "display_id",
+											"value": "1111",
+											"disabled": true
+										},
+										{
+											"key": "is_active",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2024 15:55:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1218"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 16,\n            \"total_delivery_price\": 50000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 36328038,\n            \"created_at\": \"2025-03-05T08:38:24.121345Z\"\n        },\n        {\n            \"id\": 15,\n            \"total_delivery_price\": 50000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 25483140,\n            \"created_at\": \"2025-03-05T08:26:18.730654Z\"\n        },\n        {\n            \"id\": 14,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 84519067,\n            \"created_at\": \"2025-03-04T12:20:52.446474Z\"\n        },\n        {\n            \"id\": 13,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 80885806,\n            \"created_at\": \"2025-03-04T12:18:23.204762Z\"\n        },\n        {\n            \"id\": 12,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 75729454,\n            \"created_at\": \"2025-03-04T12:13:49.816248Z\"\n        },\n        {\n            \"id\": 11,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 86022415,\n            \"created_at\": \"2025-03-04T12:12:22.753923Z\"\n        },\n        {\n            \"id\": 10,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 72319457,\n            \"created_at\": \"2025-03-04T12:06:57.311612Z\"\n        },\n        {\n            \"id\": 9,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 65806363,\n            \"created_at\": \"2025-03-04T12:06:48.152474Z\"\n        },\n        {\n            \"id\": 8,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 23929122,\n            \"created_at\": \"2025-03-04T12:04:35.326358Z\"\n        },\n        {\n            \"id\": 7,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 35557272,\n            \"created_at\": \"2025-03-04T12:01:53.946203Z\"\n        },\n        {\n            \"id\": 6,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 68178568,\n            \"created_at\": \"2025-03-04T12:01:12.860356Z\"\n        },\n        {\n            \"id\": 5,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 10731593,\n            \"created_at\": \"2025-03-04T11:59:00.750814Z\"\n        },\n        {\n            \"id\": 4,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 70540525,\n            \"created_at\": \"2025-03-04T11:49:20.68377Z\"\n        },\n        {\n            \"id\": 3,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"DELAYED\",\n            \"stage\": 4,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 63408260,\n            \"created_at\": \"2025-03-04T11:48:29.44888Z\"\n        },\n        {\n            \"id\": 2,\n            \"total_delivery_price\": 24000,\n            \"total_product_price\": 30000,\n            \"origin_address\": \"Ташкент, улица Ислама Каримова, 51\",\n            \"origin_point\": {\n                \"long\": 69.24768599607849,\n                \"lat\": 41.30978373730214\n            },\n            \"origin_eta\": null,\n            \"destination_address\": \"Ташкент, улица Фараби, 383/2\",\n            \"type\": \"EXPRESS\",\n            \"stage\": 6,\n            \"payment_type\": \"CASH\",\n            \"equipment_id\": 1,\n            \"display_id\": 48905652,\n            \"created_at\": \"2025-03-04T11:47:40.557766Z\"\n        }\n    ],\n    \"count\": 16,\n    \"page_size\": 15,\n    \"current_page\": 1,\n    \"last_page\": 2,\n    \"active_count\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Eval",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendor_order_id\": \"abc\",\n    \"origin\": [\n        {\n            \"location\": {\n                \"long\": 69.243275,\n                \"lat\": 41.28096\n            },\n            \"order\": 1,\n            \"address\": \"Chorsu\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"A13\",\n            \"floor\": 3,\n            \"apartment\": \"56\",\n            \"comment\": \"Call when arrived\",\n            \"client\": {\n                \"phone\": \"+998977304682\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"long\": 69.240354,\n                \"lat\": 41.282372\n            },\n            \"order\": 1,\n            \"address\": \"Chilonzor\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"B23\",\n            \"floor\": 2,\n            \"apartment\": \"B23\",\n            \"comment\": \"Call when arrived\",\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Some description\",\n                \"items\": []\n            },\n            \"client\": {\n                \"phone\": \"+998977304683\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\",\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders/eval",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"eval"
+							]
+						},
+						"description": "Eval endpoint is needed to check ETAs and Pricing before making the actual order request.  \n  \nAccepts the same request body as Create order enpoint"
+					},
+					"response": [
+						{
+							"name": "200 Ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\", // Id in your system\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2, // Sequence of points to be visisted\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\", // required to include at least client's phone number. Must start with \"+998\"\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1, // Can be fetched through back.noor.uz/api/v1/products/types. Id's are static and are NOT subject to change!\n                \"description\": \"Документы\",\n                \"items\": [ // Although not required, recommended to include. If items is empty, noor will have to search for couriers with empty bags to avoid the cases where products cannot fit couriers bag. Also, highly recommended to include when order has multiple destination points, as couriers have to know which products need to be dropped off at each point.\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"https://your-domain.uz/files/docc.webp\", // must be a link\n                        \"price_per_unit\": 4444, // in sums\n                        \"quantity\": 2,\n                        \"weight\": 24, // in grams\n                        \"height\": 124, // in cm\n                        \"width\": 124, // in cm\n                        \"length\": 124 // in cm\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\", // BALANCE, CASH, CARD\n    \"delivery\": {\n        \"time\": null, // Should be given when delivery should be DELAYED. Example: \"2024-01-02T15:04:05Z\"\n        \"send_link\": true, //  Whether clients should receive a tracking link for order through sms\n        \"door_to_door\": false, // Affects total delivery price\n        \"product_paid\": true, // If set to true, Noor will not interact with product price\n        \"equipment_id\": 1 // Can be fetched through https://back.noor.uz/api/v1/equipments. Id's are static and are NOT subject to change!\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/eval",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"eval"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jul 2024 18:38:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "182"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total_delivery_price\": 20962, // In sums\n    \"eta_to_pu\": \"2024-07-11T23:46:58.97107Z\",\n    \"eta_to_del\": \"2024-07-12T00:04:28.971072Z\",\n    \"order_distance\": 5250, // In meters\n    \"dead_head_distance\": 2606, // In meters\n    \"evaluated_stage\": 1 // If 1, good to go\n}"
+						},
+						{
+							"name": "200 But vendor doesn't have sufficient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\", // Id in your system\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2, // Sequence of points to be visisted\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\", // required to include at least client's phone number. Must start with \"+998\"\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1, // Can be fetched through back.noor.uz/api/v1/products/types. Id's are static and are NOT subject to change!\n                \"description\": \"Документы\",\n                \"items\": [ // Although not required, recommended to include. If items is empty, noor will have to search for couriers with empty bags to avoid the cases where products cannot fit couriers bag. Also, highly recommended to include when order has multiple destination points, as couriers have to know which products need to be dropped off at each point.\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"https://your-domain.uz/files/docc.webp\", // must be a link\n                        \"price_per_unit\": 4444, // in sums\n                        \"quantity\": 2,\n                        \"weight\": 24, // in grams\n                        \"height\": 124, // in cm\n                        \"width\": 124, // in cm\n                        \"length\": 124 // in cm\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\", // BALANCE, CASH, CARD\n    \"delivery\": {\n        \"time\": null, // Should be given when delivery should be DELAYED. Example: \"2024-01-02T15:04:05Z\"\n        \"send_link\": true, //  Whether clients should receive a tracking link for order through sms\n        \"door_to_door\": false, // Affects total delivery price\n        \"product_paid\": true, // If set to true, Noor will not interact with product price\n        \"equipment_id\": 1 // Can be fetched through https://back.noor.uz/api/v1/equipments. Id's are static and are NOT subject to change!\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/eval",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"eval"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jul 2024 18:34:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total_delivery_price\": 20962,\n    \"eta_to_pu\": \"2024-07-11T23:43:35.961853Z\",\n    \"eta_to_del\": \"2024-07-12T00:01:05.961855Z\",\n    \"order_distance\": 5250,\n    \"dead_head_distance\": 2606,\n    \"evaluated_stage\": 23\n}"
+						},
+						{
+							"name": "200 But Performer Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\", // Id in your system\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2, // Sequence of points to be visisted\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\", // required to include at least client's phone number. Must start with \"+998\"\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1, // Can be fetched through back.noor.uz/api/v1/products/types. Id's are static and are NOT subject to change!\n                \"description\": \"Документы\",\n                \"items\": [ // Although not required, recommended to include. If items is empty, noor will have to search for couriers with empty bags to avoid the cases where products cannot fit couriers bag. Also, highly recommended to include when order has multiple destination points, as couriers have to know which products need to be dropped off at each point.\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"https://your-domain.uz/files/docc.webp\", // must be a link\n                        \"price_per_unit\": 4444, // in sums\n                        \"quantity\": 2,\n                        \"weight\": 24, // in grams\n                        \"height\": 124, // in cm\n                        \"width\": 124, // in cm\n                        \"length\": 124 // in cm\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\", // BALANCE, CASH, CARD\n    \"delivery\": {\n        \"time\": null, // Should be given when delivery should be DELAYED. Example: \"2024-01-02T15:04:05Z\"\n        \"send_link\": true, //  Whether clients should receive a tracking link for order through sms\n        \"door_to_door\": false, // Affects total delivery price\n        \"product_paid\": true, // If set to true, Noor will not interact with product price\n        \"equipment_id\": 1 // Can be fetched through https://back.noor.uz/api/v1/equipments. Id's are static and are NOT subject to change!\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/eval",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"eval"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jul 2024 18:35:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "127"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total_delivery_price\": 0,\n    \"eta_to_pu\": null,\n    \"eta_to_del\": null,\n    \"order_distance\": 5250,\n    \"dead_head_distance\": 0,\n    \"evaluated_stage\": 27\n}"
+						},
+						{
+							"name": "200 But Cancelled out of zone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\", // Id in your system\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2, // Sequence of points to be visisted\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\", // required to include at least client's phone number. Must start with \"+998\"\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1, // Can be fetched through back.noor.uz/api/v1/products/types. Id's are static and are NOT subject to change!\n                \"description\": \"Документы\",\n                \"items\": [ // Although not required, recommended to include. If items is empty, noor will have to search for couriers with empty bags to avoid the cases where products cannot fit couriers bag. Also, highly recommended to include when order has multiple destination points, as couriers have to know which products need to be dropped off at each point.\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"https://your-domain.uz/files/docc.webp\", // must be a link\n                        \"price_per_unit\": 4444, // in sums\n                        \"quantity\": 2,\n                        \"weight\": 24, // in grams\n                        \"height\": 124, // in cm\n                        \"width\": 124, // in cm\n                        \"length\": 124 // in cm\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\", // BALANCE, CASH, CARD\n    \"delivery\": {\n        \"time\": null, // Should be given when delivery should be DELAYED. Example: \"2024-01-02T15:04:05Z\"\n        \"send_link\": true, //  Whether clients should receive a tracking link for order through sms\n        \"door_to_door\": false, // Affects total delivery price\n        \"product_paid\": true, // If set to true, Noor will not interact with product price\n        \"equipment_id\": 1 // Can be fetched through https://back.noor.uz/api/v1/equipments. Id's are static and are NOT subject to change!\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/eval?X-Auth={{delivery-vendor-static-token}}",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"eval"
+									],
+									"query": [
+										{
+											"key": "X-Auth",
+											"value": "{{delivery-vendor-static-token}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jul 2024 18:36:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "127"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total_delivery_price\": 0,\n    \"eta_to_pu\": null,\n    \"eta_to_del\": null,\n    \"order_distance\": 5250,\n    \"dead_head_distance\": 0,\n    \"evaluated_stage\": 28\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "uz",
+								"type": "text"
+							},
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendor_order_id\": \"abc\",\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Документы\",\n                \"items\": [\n                    {\n                        \"name\": \"docc\",\n                        \"price_per_unit\": 4444,\n                        \"quantity\": 2,\n                        \"weight\": 24,\n                        \"height\": 124,\n                        \"width\": 124,\n                        \"length\": 124\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\",\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"send_link\": true,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "uz",
+										"type": "text"
+									},
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\", // Id in your system\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": { // Product information should be duplicated for origin and destination. This is needed to let couriers know which product to drop off at which point.\n                    \"type_id\": 1,\n                    \"description\": \"Документы\",\n                    \"items\": [\n                        {\n                            \"name\": \"docc\",\n                            \"price_per_unit\": 4444,\n                            \"quantity\": 2,\n                            \"weight\": 24,\n                            \"height\": 124,\n                            \"width\": 124,\n                            \"length\": 124\n                        }\n                    ]\n                }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2, // Sequence of points to be visisted\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\", // required to include at least client's phone number. Must start with \"+998\"\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1, // Can be fetched through back.noor.uz/api/v1/products/types. Id's are static and are NOT subject to change!\n                \"description\": \"Документы\",\n                \"items\": [ // Although not required, recommended to include. If items is empty, noor will have to search for couriers with empty bags to avoid the cases where products cannot fit couriers bag. Also, highly recommended to include when order has multiple destination points, as couriers have to know which products need to be dropped off at each point.\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"https://your-domain.uz/files/docc.webp\", // not required, must be a link\n                        \"price_per_unit\": 4444, // in sums\n                        \"quantity\": 2,\n                        \"weight\": 24, // in grams\n                        \"height\": 124, // in cm\n                        \"width\": 124, // in cm\n                        \"length\": 124 // in cm\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\", // BALANCE, CASH, CARD\n    \"delivery\": {\n        \"time\": \"2030-01-14T11:37:51.98Z\", // Should be given when delivery should be DELAYED. Example: \"2024-01-02T15:04:05Z\"\n        \"send_link\": true, //  Whether clients should receive a tracking link for order through sms\n        \"door_to_door\": false, // Affects total delivery price\n        \"product_paid\": true, // If set to true, Noor will not interact with product price\n        \"equipment_id\": 1 // Can be fetched through https://back.noor.uz/api/v1/equipments. Id's are static and are NOT subject to change!\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2024 15:36:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1860"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"vendor_order_id\": \"abc\",\n    \"stage\": 1,\n    \"order\": {\n        \"id\": 506,\n        \"vendor_order_id\": \"abc\",\n        \"reason\": null,\n        \"display_id\": 98237758,\n        \"stage\": 1,\n        \"payment_type\": \"BALANCE\",\n        \"origin\": [\n            {\n                \"location\": {\n                    \"long\": 69.240435,\n                    \"lat\": 41.2824\n                },\n                \"order\": 1,\n                \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n                \"entrance\": \"11\",\n                \"door_phone\": \"22\",\n                \"apartment\": \"44\",\n                \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n                \"arrived_at\": null,\n                \"handed_over_at\": null,\n                \"eta\": null,\n                \"skipped_at\": null,\n                \"products\": {\n                    \"type_id\": 1,\n                    \"description\": \"Документы\",\n                    \"items\": [\n                        {\n                            \"name\": \"docc\",\n                            \"price_per_unit\": 4444,\n                            \"quantity\": 2,\n                            \"weight\": 24,\n                            \"height\": 124,\n                            \"width\": 124,\n                            \"length\": 124\n                        }\n                    ]\n                },\n                \"client\": {\n                    \"phone\": \"+998901231076\",\n                    \"name\": \"Palonchi palnochiev\",\n                    \"email\": \"palonchiev.tiloqchi@gmail.com\"\n                }\n            }\n        ],\n        \"destination\": [\n            {\n                \"location\": {\n                    \"long\": 69.27787727401602,\n                    \"lat\": 41.307144197524764\n                },\n                \"order\": 2,\n                \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n                \"entrance\": \"1\",\n                \"door_phone\": \"2\",\n                \"floor\": 3,\n                \"apartment\": \"4\",\n                \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n                \"arrived_at\": null,\n                \"handed_over_at\": null,\n                \"eta\": null,\n                \"skipped_at\": null,\n                \"products\": {\n                    \"type_id\": 1,\n                    \"description\": \"Документы\",\n                    \"items\": [\n                        {\n                            \"name\": \"docc\",\n                            \"price_per_unit\": 4444,\n                            \"quantity\": 2,\n                            \"weight\": 24,\n                            \"height\": 124,\n                            \"width\": 124,\n                            \"length\": 124\n                        }\n                    ]\n                },\n                \"client\": {\n                    \"phone\": \"+998901231070\",\n                    \"name\": \"Palonchi palnochiev\",\n                    \"email\": \"palonchiev.tiloqchi@gmail.com\"\n                }\n            }\n        ],\n        \"return_address\": null,\n        \"pricing\": {\n            \"total\": 18000,\n            \"products\": 8888\n        },\n        \"distances\": {\n            \"order\": 5250,\n            \"dead_head\": 25\n        },\n        \"delivery\": {\n            \"type\": \"DELAYED\",\n            \"time\": \"2030-01-14T11:37:51.98Z\",\n            \"door_to_door\": false,\n            \"product_paid\": true,\n            \"equipment_id\": 1\n        },\n        \"vendor\": {\n            \"phone\": \"+998977304681\",\n            \"name\": \"Buchet\",\n            \"logo\": null\n        },\n        \"courier\": null,\n        \"trace\": null,\n        \"created_at\": \"2024-08-05T15:36:52.164090937Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reorder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders/:order_id/re-order",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":order_id",
+								"re-order"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "53451"
+								}
+							]
+						},
+						"description": "Reorder endpoint lets you **search** for couriers for the **same** order again without having to create **another** order.  \n  \nIt **only works**, if the order has been **cancelled** or courier was previously **not found**."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}api/v1/orders/:order_id/re-order",
+									"host": [
+										"{{delivery-main}}api"
+									],
+									"path": [
+										"v1",
+										"orders",
+										":order_id",
+										"re-order"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "53451"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 16:48:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "400 Order is closed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id/re-order",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id",
+										"re-order"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "53451"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 16:57:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"order.is.closed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders/:order_id/cancel",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":order_id",
+								"cancel"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "610"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id/cancel",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id",
+										"cancel"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "608"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 06 Aug 2024 10:01:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						},
+						{
+							"name": "400 Order is closed",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id/cancel",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id",
+										"cancel"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "53451"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 16:54:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"order.is.closed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendor_order_id\": \"abc\",\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Документы\",\n                \"items\": [\n                    {\n                        \"name\": \"docc\",\n                        \"price_per_unit\": 4444,\n                        \"quantity\": 2,\n                        \"weight\": 24,\n                        \"height\": 124,\n                        \"width\": 124,\n                        \"length\": 124\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\",\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"send_link\": true,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/orders/:order_id",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "53451"
+								}
+							]
+						},
+						"description": "Update endpoint lets you change locations, addresses, production information, comments...\n\nIt only works if the order is **active**. Otherwise, you will get **order.is.closed** error.\n\nAlso, it will not update locations of points that have already been **visited** by courier."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\",\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Документы\",\n                \"items\": [\n                    {\n                        \"name\": \"docc\",\n                        \"price_per_unit\": 4444,\n                        \"quantity\": 2,\n                        \"weight\": 24,\n                        \"height\": 124,\n                        \"width\": 124,\n                        \"length\": 124\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\",\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"send_link\": true,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "53451"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 16:46:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2467"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 53451,\n    \"vendor_order_id\": \"abc\",\n    \"reason\": null,\n    \"display_id\": 57933189,\n    \"stage\": 6,\n    \"payment_type\": \"BALANCE\",\n    \"origin\": [\n        {\n            \"id\": \"rcZJgD\",\n            \"location\": {\n                \"long\": 69.240435,\n                \"lat\": 41.2824\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"initial_eta\": null,\n            \"headed_towards\": false,\n            \"arrived_at\": null,\n            \"handed_over_at\": null,\n            \"closed_point_at_distance\": 0,\n            \"eta\": \"2025-08-22T18:23:48.388543Z\",\n            \"skipped_at\": null,\n            \"return_arrived_at\": null,\n            \"returned_at\": null,\n            \"products\": {\n                \"id\": null,\n                \"type_id\": 0,\n                \"description\": null,\n                \"items\": null\n            },\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"id\": \"BVc8Pt\",\n            \"location\": {\n                \"long\": 69.27787727401602,\n                \"lat\": 41.307144197524764\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"initial_eta\": null,\n            \"headed_towards\": false,\n            \"arrived_at\": null,\n            \"handed_over_at\": null,\n            \"closed_point_at_distance\": 0,\n            \"eta\": \"2025-08-22T18:39:46.388554Z\",\n            \"skipped_at\": null,\n            \"return_arrived_at\": null,\n            \"returned_at\": null,\n            \"products\": {\n                \"id\": null,\n                \"type_id\": 1,\n                \"description\": \"Документы\",\n                \"items\": [\n                    {\n                        \"name\": \"docc\",\n                        \"photo\": \"\",\n                        \"price_per_unit\": 4444,\n                        \"quantity\": 2,\n                        \"weight\": 24,\n                        \"height\": 124,\n                        \"width\": 124,\n                        \"length\": 124\n                    }\n                ]\n            },\n            \"client\": {\n                \"phone\": \"+998901231070\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"return_address\": null,\n    \"pricing\": {\n        \"total\": 33000,\n        \"products\": 0,\n        \"order\": 33000,\n        \"courier_profit\": 26400,\n        \"discount\": null,\n        \"need_debt\": false,\n        \"given_debt\": false,\n        \"ofd_check_url\": null,\n        \"product_ofd_check_url\": null\n    },\n    \"distances\": {\n        \"order\": 4790,\n        \"dead_head\": 2000\n    },\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1,\n        \"send_link\": true\n    },\n    \"vendor\": {\n        \"id\": 1,\n        \"phone\": \"+998977304681\",\n        \"name\": \"Buchet\",\n        \"business_name\": \"Buchet\",\n        \"is_business\": true,\n        \"is_corporate\": true,\n        \"logo\": \"client/1030c4286310e5f7df95f621315da7dae.webp\"\n    },\n    \"courier\": null,\n    \"card\": null,\n    \"trace\": null,\n    \"rating\": null,\n    \"link\": null,\n    \"accepted_at\": null,\n    \"created_at\": \"2025-07-31T16:45:53.302914Z\",\n    \"search_started_at\": \"2025-07-31T16:45:53.315596193Z\",\n    \"is_market\": false,\n    \"is_integration\": true,\n    \"is_business\": false,\n    \"total_late_minutes\": 0,\n    \"search_stopped_at\": null,\n    \"last_updated_by\": null\n}"
+						},
+						{
+							"name": "400 Order is closed",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor_order_id\": \"abc\",\n    \"origin\": [\n        {\n            \"location\": {\n                \"lat\": 41.2824,\n                \"long\": 69.240435\n            },\n            \"order\": 1,\n            \"address\": \"Ташкент,Мирабадский район,махаллинский сход граждан Шароф Рашидов\",\n            \"entrance\": \"11\",\n            \"door_phone\": \"22\",\n            \"floor\": 0,\n            \"apartment\": \"44\",\n            \"comment\": \"Kelishingiz bilan qo'g'iroq qiling.\",\n            \"client\": {\n                \"phone\": \"+998901231076\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            }\n        }\n    ],\n    \"destination\": [\n        {\n            \"location\": {\n                \"lat\": 41.307144197524764,\n                \"long\": 69.27787727401602\n            },\n            \"order\": 2,\n            \"address\": \"Ташкент,Юнусабадский район, улица Шахрисабз, 2\",\n            \"entrance\": \"1\",\n            \"door_phone\": \"2\",\n            \"floor\": 3,\n            \"apartment\": \"4\",\n            \"comment\": \"Klient rus tilida gaplashadi faqat.\",\n            \"client\": {\n                \"phone\": \"+998901231070\",\n                \"name\": \"Palonchi palnochiev\",\n                \"email\": \"palonchiev.tiloqchi@gmail.com\"\n            },\n            \"products\": {\n                \"type_id\": 1,\n                \"description\": \"Документы\",\n                \"items\": [\n                    {\n                        \"name\": \"docc\",\n                        \"price_per_unit\": 4444,\n                        \"quantity\": 2,\n                        \"weight\": 24,\n                        \"height\": 124,\n                        \"width\": 124,\n                        \"length\": 124\n                    }\n                ]\n            }\n        }\n    ],\n    \"payment_type\": \"BALANCE\",\n    \"delivery\": {\n        \"type\": \"EXPRESS\",\n        \"time\": null,\n        \"send_link\": true,\n        \"door_to_door\": false,\n        \"product_paid\": true,\n        \"equipment_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/orders/:order_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":order_id"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "53451"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 16:55:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"order.is.closed\"\n}"
+						}
+					]
+				}
+			],
+			"description": "### **Possible Stages**:\n\n``` go\nconst (\n    StageNew                          = 1\n    StageEstimating                   = 2\n    StageReadyForPayment              = 3\n    StageScheduled                    = 4\n    StagePerformerLookUp              = 5\n    StagePerformerDraft               = 6\n    StagePerformerFound               = 7\n    StagePickUpArrived                = 8\n    StageReadyForPickUpConfirmation   = 9\n    StagePickedUp                     = 10\n    StageDeliveryArrived              = 11\n    StageReadyForDeliveryConfirmation = 12\n    StagePayWaiting                   = 13\n    StageDelivered                    = 14\n    StageDeliveredFinish              = 15\n    StageReturning                    = 16\n    StageReturnArrived                = 17\n    StageReadyForReturnConfirmation   = 18\n    StageReturned                     = 19\n    StageReturnedFinish               = 20\n    StageCancelledByTaxi              = 21\n    StageCancelled                    = 22\n    StageCancelledWithPayment         = 23\n    StageCancelledWithItemsOnHand     = 24\n    StageFailed                       = 25\n    StageEstimatingFailed             = 26\n    StagePerformerNotFound            = 27\n    StageCancelledOutOfZone           = 28\n    StageCancelledOutOfRange          = 29\n)\n\n ```\n\n### **Payment Types**:\n\n``` go\nconst (\n    PaymentTypeCard    = \"CARD\"\n    PaymentTypeCash    = \"CASH\"\n    PaymentTypeBalance = \"BALANCE\"\n)\n\n ```\n\nPayments can be accomplished through **CARD**, **CASH** and **BALANCE**. In case of balance, vendors can fill their balance beforehand and use that balance. In case of cash, delivery price will be taken from end client. And in case of card, the vendors card will be queired for suffitient funds right away and will be charged only after the delivery is finished.\n\n**  \nAdditionals**:**Product information is not required, but if provided, it should be duplicated both for origin and destination points. This is needed to let couriers know which products needs to dropped off at which point.  \n**\n\nIf _**delivery.product_paid**_ is set to _**true**_, Noor will not interact with product price. It will assume that price for product is already paid. Otherwise, Noor will get product money from end client.\n\nEquipment information can be different in _**DEV**_ and _**PROD**_ environments. **However** ,they are **NOT** subject to change. The same can be said about product types.\n\n  \nEndpoints:\n\n  \nEval - lets you get pricing, distance and ETA information before creating the actual order. Vendor is not charged for it.  \n  \nReorder - if courier is not found for order, or the order has been cancelled prior, this endpoint lets you trigger the search for couriers again without having to create another order.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{delivery-vendor-token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Equipments",
+			"item": [
+				{
+					"name": "Fetch All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/equipments",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"equipments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ru",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/equipments",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"equipments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2024 15:14:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "586"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"equipments\": [\n        {\n            \"id\": 4,\n            \"name\": \"Цветочный ящик\",\n            \"photo\": \"equipments/29419e8589e76f658435345461b9189d.png\", // can be fetched through https://back.noor.uz/files/equipments/29419e8589e76f658435345461b9189d.png\n            \"width\": 50, // in cm\n            \"height\": 80, // in cm\n            \"length\": 50, // in cm\n            \"max_weight\": 25000, // in gramms\n            \"max_range\": 20, // in km\n            \"max_volume\": 200000 // in cm\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Термосумка\",\n            \"photo\": \"equipments/9a7bfa59ff1bf9f5de16d588175ae4c6.png\",\n            \"width\": 53,\n            \"height\": 53,\n            \"length\": 53,\n            \"max_weight\": 20000,\n            \"max_range\": 20,\n            \"max_volume\": 148877\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Стандарт сумка\",\n            \"photo\": \"equipments/b5bacde9510671fec78f3b88190e4b3c1.png\",\n            \"width\": 45,\n            \"height\": 45,\n            \"length\": 45,\n            \"max_weight\": 15000,\n            \"max_range\": 30,\n            \"max_volume\": 100\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Fetch All",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 20 Aug 2024 06:31:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 12,\n        \"card_number\": \"8600********8110\",\n        \"verified\": true,\n        \"is_default\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"card_number\": \"8600346578134555\",\n    \"expiry_date\": \"04/24\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"card_number\": \"8656780455456798\",\n    \"expiry_date\": \"02/26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 09:47:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code_sent\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"794888\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards/verify",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards",
+								"verify"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"794888\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards/verify",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards",
+										"verify"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 09:47:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
+				},
+				{
+					"name": "Top Up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id/top-up",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards",
+								":card_id",
+								"top-up"
+							],
+							"variable": [
+								{
+									"key": "card_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 10 // In sums\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id/top-up",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards",
+										":card_id",
+										"top-up"
+									],
+									"variable": [
+										{
+											"key": "card_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 09:49:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards",
+								":card_id"
+							],
+							"variable": [
+								{
+									"key": "card_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards",
+										":card_id"
+									],
+									"variable": [
+										{
+											"key": "card_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 09:49:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Make default",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id/make-default",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"cards",
+								":card_id",
+								"make-default"
+							],
+							"variable": [
+								{
+									"key": "card_id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/cards/:card_id/make-default",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"cards",
+										":card_id",
+										"make-default"
+									],
+									"variable": [
+										{
+											"key": "card_id",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 20 Aug 2024 06:29:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OK\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Types",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/products/types",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"types"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ru",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/products/types",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"types"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.27.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2024 15:14:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "660"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Документы\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Горячая еда\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Бакалея\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Цветы\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Косметика\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Подарок\"\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Товары для детей\"\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Одежда\"\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Электроника\"\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Мебель\"\n    },\n    {\n        \"id\": 11,\n        \"name\": \"Товары для дома\"\n    },\n    {\n        \"id\": 12,\n        \"name\": \"Лекарства\"\n    },\n    {\n        \"id\": 13,\n        \"name\": \"Парфюмерия\"\n    },\n    {\n        \"id\": 14,\n        \"name\": \"Обувь\"\n    },\n    {\n        \"id\": 15,\n        \"name\": \"Спортивные товары\"\n    },\n    {\n        \"id\": 16,\n        \"name\": \"Товары для животных\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"Другое\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/locations?address=chilon&shop_id=4ec4c1ba-6403-4c8d-9416-ab09769b16ca",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "address",
+									"value": "chilon"
+								},
+								{
+									"key": "shop_id",
+									"value": "4ec4c1ba-6403-4c8d-9416-ab09769b16ca"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ru",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/locations?address=chilon&shop_id=4ec4c1ba-6403-4c8d-9416-ab09769b16ca",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"locations"
+									],
+									"query": [
+										{
+											"key": "address",
+											"value": "chilon"
+										},
+										{
+											"key": "shop_id",
+											"value": "4ec4c1ba-6403-4c8d-9416-ab09769b16ca"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 17:13:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "411"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 592,\n        \"location\": {\n            \"long\": 69.240417,\n            \"lat\": 41.282345\n        },\n        \"name\": null,\n        \"address\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"entrance\": \"1A\",\n        \"floor\": null,\n        \"apartment\": \"2a\",\n        \"comment\": \"Call this number when arrived\",\n        \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n        \"client_phone\": \"+123123123212\",\n        \"client_name\": \"MuhammadBobur\",\n        \"tag\": null,\n        \"is_business\": false,\n        \"created_at\": \"2025-07-31T17:09:34.426042Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": {\n        \"long\": 69.240417,\n        \"lat\": 41.282345\n    },\n    \"address\": {\n        \"uz\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"ru\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"en\": \"улица М. Толибжонова, 6, Ташкент\"\n    },\n    \"entrance\": \"1A\",\n    \"floor\": null,\n    \"apartment\": \"2a\",\n    \"comment\": \"Call this number when arrived\",\n    \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n    \"client_phone\": \"+123123123212\",\n    \"client_name\": \"MuhammadBobur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/locations",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"locations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ru",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"location\": {\n        \"long\": 69.240417,\n        \"lat\": 41.282345\n    },\n    \"address\": {\n        \"uz\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"ru\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"en\": \"улица М. Толибжонова, 6, Ташкент\"\n    },\n    \"entrance\": \"1A\",\n    \"floor\": null,\n    \"apartment\": \"2a\",\n    \"comment\": \"Call this number when arrived\",\n    \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n    \"client_phone\": \"+123123123212\",\n    \"client_name\": \"MuhammadBobur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/locations",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"locations"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 17:09:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "412"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 592,\n    \"location\": {\n        \"long\": 69.240417,\n        \"lat\": 41.282345\n    },\n    \"name\": null,\n    \"address\": \"улица М. Толибжонова, 6, Ташкент\",\n    \"entrance\": \"1A\",\n    \"floor\": null,\n    \"apartment\": \"2a\",\n    \"comment\": \"Call this number when arrived\",\n    \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n    \"client_phone\": \"+123123123212\",\n    \"client_name\": \"MuhammadBobur\",\n    \"tag\": null,\n    \"is_business\": false,\n    \"created_at\": \"2025-07-31T17:09:34.428397593Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": {\n        \"long\": 69.240417,\n        \"lat\": 41.282345\n    },\n    \"address\": {\n        \"uz\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"ru\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"en\": \"улица М. Толибжонова, 6, Ташкент\"\n    },\n    \"entrance\": \"1A\",\n    \"floor\": null,\n    \"apartment\": \"2a\",\n    \"comment\": \"Call this number when arrived\",\n    \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n    \"client_phone\": \"+123123123212\",\n    \"client_name\": \"MuhammadBobur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/locations/:location_id",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"locations",
+								":location_id"
+							],
+							"variable": [
+								{
+									"key": "location_id",
+									"value": "591"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"location\": {\n        \"long\": 69.240417,\n        \"lat\": 41.282345\n    },\n    \"address\": {\n        \"uz\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"ru\": \"улица М. Толибжонова, 6, Ташкент\",\n        \"en\": \"улица М. Толибжонова, 6, Ташкент\"\n    },\n    \"entrance\": \"1A\",\n    \"floor\": null,\n    \"apartment\": \"2a\",\n    \"comment\": \"Call this number when arrived\",\n    \"shop_id\": \"4ec4c1ba-6403-4c8d-9416-ab09769b16ca\",\n    \"client_phone\": \"+123123123212\",\n    \"client_name\": \"MuhammadBobur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/locations/:location_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"locations",
+										":location_id"
+									],
+									"variable": [
+										{
+											"key": "location_id",
+											"value": "591"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 17:11:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "{{delivery-vendor-static-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{delivery-main}}/api/v1/vendors/locations/:location_id",
+							"host": [
+								"{{delivery-main}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vendors",
+								"locations",
+								":location_id"
+							],
+							"variable": [
+								{
+									"key": "location_id",
+									"value": "591"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "{{delivery-vendor-static-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{delivery-main}}/api/v1/vendors/locations/:location_id",
+									"host": [
+										"{{delivery-main}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"vendors",
+										"locations",
+										":location_id"
+									],
+									"variable": [
+										{
+											"key": "location_id",
+											"value": "591"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.29.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 31 Jul 2025 17:12:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}
